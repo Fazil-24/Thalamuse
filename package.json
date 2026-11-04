@@ -1,0 +1,25 @@
+{
+  "name": "thalamuse",
+  "version": "1.0.0",
+  "description": "Phone-only reading companion: inferred attention from touch, scroll and motion; Meta Muse reshapes dense text.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "tunnel": "npx --yes cloudflared tunnel --url http://localhost:3000",
+    "tunnel:ngrok": "npx --yes ngrok http 3000",
+    "check-muse": "node server/check-muse.js",
+    "live-test": "node server/live-test.js"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "openai": "^7.45.1",
+    "pdfjs-dist": "4.10.38"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true
+}

@@ -1,0 +1,40 @@
+{
+  "segmentId": "s3",
+  "note": "Two parallel 3-question sets on segment 3, so the second pass is not just a repeat of the first quiz. Both sets cover the same depth of the passage.",
+  "sets": {
+    "A": [
+      {
+        "q": "Short processes stuck waiting behind one long process under FCFS is called…",
+        "options": ["The convoy effect", "Aging", "Thrashing", "Context switching"],
+        "answer": 0
+      },
+      {
+        "q": "How is starvation in priority scheduling usually prevented?",
+        "options": ["Shrinking the time quantum", "Aging: slowly raising the priority of waiting processes", "Running processes in arrival order", "Moving long jobs to a faster core"],
+        "answer": 1
+      },
+      {
+        "q": "In a Multilevel Feedback Queue, a process that uses its entire time quantum is…",
+        "options": ["Terminated", "Promoted to a higher-priority queue", "Demoted to a lower-priority queue", "Given a double quantum in the same queue"],
+        "answer": 2
+      }
+    ],
+    "B": [
+      {
+        "q": "Which algorithm gives the minimum average waiting time for a given set of processes?",
+        "options": ["FCFS", "Round Robin", "Shortest-Job-First", "Multilevel Feedback Queue"],
+        "answer": 2
+      },
+      {
+        "q": "If the Round Robin time quantum is made very large, Round Robin behaves like…",
+        "options": ["SJF", "FCFS", "Priority scheduling", "MLFQ"],
+        "answer": 1
+      },
+      {
+        "q": "The preemptive version of SJF is called…",
+        "options": ["Shortest-Remaining-Time-First", "Highest-Response-Ratio-Next", "Earliest-Deadline-First", "Preemptive Round Robin"],
+        "answer": 0
+      }
+    ]
+  }
+}

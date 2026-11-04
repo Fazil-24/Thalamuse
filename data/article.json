@@ -1,0 +1,36 @@
+{
+  "title": "Module 3: CPU Process Scheduling",
+  "subtitle": "Operating Systems — exam prep",
+  "segments": [
+    {
+      "id": "s1",
+      "heading": "Why the CPU needs a scheduler",
+      "difficulty": "easy",
+      "text": "A modern operating system runs many processes at once, but a single CPU core can execute only one of them at any instant. The processes that are loaded in memory and waiting for their turn sit in the ready queue. The CPU scheduler (also called the short-term scheduler) decides which process from the ready queue gets the core next, and the dispatcher performs the actual switch. Because this decision happens many times per second, the policy the scheduler follows has a direct effect on how responsive and efficient the whole system feels."
+    },
+    {
+      "id": "s2",
+      "heading": "How schedulers are judged",
+      "difficulty": "medium",
+      "text": "Scheduling algorithms are compared on a handful of criteria. CPU utilization is the fraction of time the core is doing useful work, and throughput is the number of processes completed per unit time. Turnaround time is the total time from a process's arrival to its completion. Waiting time is the portion of that turnaround spent sitting in the ready queue, and response time is how long it takes from arrival until the process first gets the CPU. A scheduler is preemptive if it can take the CPU away from a running process before that process finishes its burst, and non-preemptive if a process keeps the CPU until it blocks or terminates."
+    },
+    {
+      "id": "s3",
+      "heading": "The five classic algorithms",
+      "difficulty": "hard",
+      "text": "First-Come, First-Served (FCFS) is the simplest policy: processes are run in the exact order they arrive in the ready queue, it is non-preemptive, and it is easy to implement with a FIFO queue, but it suffers from the convoy effect, in which many short processes are stuck waiting behind one long CPU-bound process, inflating the average waiting time. Shortest-Job-First (SJF) instead selects the process with the smallest next CPU burst, which is provably optimal for minimizing average waiting time for a given set of processes; its preemptive form, Shortest-Remaining-Time-First (SRTF), will interrupt the running process if a newly arrived one has a shorter remaining burst, but both variants require predicting the length of the next burst, usually by exponential averaging of previous bursts, and both can starve long processes. Priority scheduling generalizes this by attaching a priority number to every process and always running the highest-priority one (SJF is simply priority scheduling where priority is the inverse of the predicted burst), and it can be preemptive or non-preemptive, yet it too risks indefinite blocking, or starvation, of low-priority processes, a problem conventionally solved by aging, which gradually raises the priority of processes that have waited a long time. Round Robin (RR) was designed for time-sharing systems: each process receives a fixed time quantum, typically 10 to 100 milliseconds, and if it has not finished when the quantum expires it is preempted and placed at the tail of the ready queue, so the behavior depends heavily on the quantum size, because a very large quantum makes RR degenerate into FCFS while a very small one wastes too much time on context switches, and a common rule of thumb is that about 80 percent of CPU bursts should be shorter than the quantum. Finally, the Multilevel Feedback Queue (MLFQ) maintains several ready queues of different priorities, each potentially with its own algorithm and quantum, and lets processes move between them: a process that uses its entire quantum is demoted to a lower-priority queue, while a process that waits too long in a low-priority queue can be promoted, which naturally favors short interactive jobs and I/O-bound processes while still preventing starvation, making MLFQ the most general and also the most complex scheduler to configure, since it is defined by the number of queues, the algorithm for each queue, and the rules for upgrading and demoting processes."
+    },
+    {
+      "id": "s4",
+      "heading": "A quick worked example",
+      "difficulty": "medium",
+      "text": "Suppose three processes arrive at time 0 with CPU bursts of P1 = 24 ms, P2 = 3 ms and P3 = 3 ms. Under FCFS in the order P1, P2, P3, the waiting times are 0, 24 and 27 ms, for an average of 17 ms. If the same processes run in SJF order, P2, P3, P1, the waiting times become 0, 3 and 6 ms, for an average of just 3 ms. The work is identical; only the order changed, and that is the whole argument for smarter scheduling."
+    },
+    {
+      "id": "s5",
+      "heading": "What to remember for the exam",
+      "difficulty": "easy",
+      "text": "Know which algorithms are preemptive, which can starve processes and how aging fixes that, why SJF is optimal for average waiting time but hard to implement, and how the Round Robin quantum trades responsiveness against context-switch overhead. Being able to draw a Gantt chart and compute average waiting and turnaround times for FCFS, SJF and RR is the most commonly tested skill in this module."
+    }
+  ]
+}

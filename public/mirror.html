@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thalamuse · mirror</title>
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+  <link rel="stylesheet" href="/css/app.css" />
+  <style>
+    body { background: var(--night); color: var(--night-ink); --paper: var(--night); --paper-2: var(--night-2); --ink: var(--night-ink); --ink-2: #c4bba9; --ink-3: var(--night-3); --rule: #2c2822; --sig-idle: #4a443b; }
+    .m { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; padding: 36px 48px; min-height: 100vh; }
+    .m-top { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 18px; border-bottom: 1px solid var(--rule); padding-bottom: 18px; }
+    .m-top .mast-word { font-size: 2rem; }
+    .m-top .mono { font-size: 0.75rem; color: var(--night-3); text-transform: uppercase; }
+    .m-top .live { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .m-top .live i { width: 10px; height: 10px; border-radius: 50%; background: var(--sig-load); box-shadow: 0 0 10px var(--sig-load); }
+    .m-top .live.stale i { background: var(--night-3); box-shadow: none; }
+    .m-article .seg { margin: 0 0 26px; }
+    .m-article .seg h2 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+    .m-article .seg-body { font-size: 1rem; line-height: 1.6; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    .m-article .seg.cur .seg-body { color: var(--night-ink); -webkit-line-clamp: 7; }
+    .m-article .seg.transformed .seg-body { -webkit-line-clamp: 12; }
+    .m-article .seg.flare .seg-body { opacity: 0.35; }
+    .m-side { position: sticky; top: 36px; align-self: start; }
+    .m-big { font: 300 7rem/0.9 var(--display); font-variant-numeric: tabular-nums; letter-spacing: -0.04em; margin: 6px 0 0; }
+    .m-big small { font: italic 400 2rem var(--display); color: var(--night-3); margin-left: 14px; letter-spacing: 0; }
+    .m-side .trace-svg { height: 140px; }
+    .m-side .spark-card { margin-top: 18px; }
+    .m-side .spark-card .why { font-size: 1.35rem; }
+    .m-side .graph-map span { width: 34px; height: 34px; font-size: 0.8rem; }
+    #m-muse.on { color: #3fd1bd; } #m-muse.off { color: var(--demo); }
+    .m-note { font: 0.72rem/1.5 var(--mono); color: var(--night-3); margin-top: 22px; }
+  </style>
+</head>
+<body>
+  <div class="m">
+    <div class="m-top">
+      <span class="mast-word">Thala<em>muse</em></span>
+      <span class="mono">Live mirror of the phone</span>
+      <span class="mono" id="m-muse"></span>
+      <span class="mono live" id="live"><i></i><span id="live-txt">waiting for phone</span></span>
+    </div>
+    <div class="m-article" id="m-article"></div>
+    <div class="m-side">
+      <p class="lens-label"><span>Attention · inferred</span><span id="m-where"></span></p>
+      <p class="m-big"><span id="m-att">—</span><small id="m-state">listening</small></p>
+      <p class="lens-label" style="margin-top:28px"><span>Content graph</span><span>one node per section</span></p>
+      <div class="graph-map" id="m-map"></div>
+      <p class="lens-label"><span>Live signal from the phone</span><span>last ~12 s</span></p>
+      <div id="m-trace"></div>
+      <div id="m-legend"></div>
+      <div id="m-card"></div>
+      <p class="m-note">Every score is inferred from scroll, re-reading, touch and phone motion. No camera, no microphone, no wearable.</p>
+    </div>
+  </div>
+  <script type="module" src="/js/mirror.js"></script>
+</body>
+</html>

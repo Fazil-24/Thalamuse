@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#12110f" media="(prefers-color-scheme: dark)" />
+  <title>Thalamuse</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+  <!-- Cover -->
+  <div id="gate" class="cover">
+    <div class="cover-inner">
+      <p class="muse-status mono" id="muse-status" hidden></p>
+      <p class="mono kicker">An attention-aware reader · Meta Muse</p>
+      <h1 class="wordmark">Thala<em>muse</em></h1>
+      <p class="cover-lede">Text that notices when you're losing it, and reshapes itself.</p>
+
+      <div class="cover-demo" aria-hidden="true">
+        <span class="ribbon-demo"></span>
+        <p>First-Come, First-Served is the simplest policy: processes are run in the exact order they arrive, it is non-preemptive, and it suffers from the convoy effect, in which…</p>
+      </div>
+
+      <ol class="cover-steps mono">
+        <li><b>01</b> Sense <span>scroll, re-reading, touch, phone motion</span></li>
+        <li><b>02</b> Infer <span>a live attention signal per paragraph</span></li>
+        <li><b>03</b> Reshape <span>Muse rewrites and draws what you missed</span></li>
+      </ol>
+
+      <p class="own-now mono" id="own-now" hidden></p>
+      <button id="start" class="ink-btn">Begin reading</button>
+      <button id="own-open" class="link-btn own-open" type="button">Or read your own PDF or text</button>
+      <a id="own-back" class="link-btn own-open" href="/" hidden>Back to the sample article</a>
+
+      <section id="own" class="own" hidden>
+        <p class="mono kicker">Your own text</p>
+        <label class="own-file"><input id="own-file" type="file" accept=".pdf,.txt,.md,application/pdf,text/plain" /><span>Choose a PDF or text file</span></label>
+        <input id="own-title" class="own-input" type="text" placeholder="Title (optional)" maxlength="90" />
+        <textarea id="own-text" class="own-input" rows="7" placeholder="…or paste text here (at least about 120 words)"></textarea>
+        <button id="own-go" class="ink-btn" type="button">Shape it into sections</button>
+        <p id="own-msg" class="cover-fine"></p>
+        <p class="cover-fine">PDFs are read on this phone; the file is never uploaded. The extracted text goes to Muse Spark, which groups it into sections and marks the densest one. Scanned PDFs have no text to read. The comprehension check only works on the sample article.</p>
+      </section>
+      <p class="cover-fine">No camera, no microphone. Only the article text and a short summary of your scroll and motion readings go to Muse. Every score is inferred, not measured.</p>
+    </div>
+  </div>
+
+  <div id="banners"></div>
+
+  <!-- Masthead + lens -->
+  <header id="masthead">
+    <button id="back" class="mast-back" type="button" hidden>← Reading</button>
+    <span class="mast-word">Thala<em>muse</em></span>
+    <button id="signal-chip" class="signal-chip" type="button" aria-expanded="false" aria-controls="lens">
+      <span class="chip-dot"></span>
+      <span class="chip-num" data-r="attention">—</span>
+      <span class="chip-state" data-r="state">listening</span>
+      <span class="chip-inf mono">inferred</span>
+    </button>
+    <div id="progress"><i></i></div>
+  </header>
+
+  <aside id="lens" class="lens" aria-hidden="true">
+    <div class="lens-inner">
+      <div id="viz"></div>
+      <details class="raw">
+        <summary class="mono">Raw sensor readings &amp; thresholds</summary>
+        <div id="dbg-live"></div>
+        <p class="lens-note">Classifier thresholds. Edit and apply to tune live; saved on this phone only.</p>
+        <textarea id="dbg-config" spellcheck="false"></textarea>
+        <div class="row-buttons">
+          <button id="dbg-apply" class="ink-btn small">Apply</button>
+          <button id="dbg-reset" class="ghost-btn small">Reset</button>
+          <button id="dbg-force" class="ghost-btn small">Debug: force at-risk here</button>
+        </div>
+        <p id="dbg-msg" class="lens-note"></p>
+      </details>
+      <button id="lens-close" class="lens-grip" type="button" aria-label="Close signal panel"><i></i></button>
+    </div>
+  </aside>
+  <div id="lens-scrim"></div>
+
+  <main>
+    <article id="view-read" class="view"><div id="article"></div></article>
+    <div id="view-quiz" class="view" hidden></div>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
